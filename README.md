@@ -2,7 +2,7 @@
 A snake game made by C/C++  
 這是一個用 C/C++ 的貪食蛇遊戲。
 
-## ProJect Status
+## Project Status
 Not finish
 
 ## Download
