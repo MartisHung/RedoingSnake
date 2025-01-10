@@ -1,24 +1,25 @@
+/**
+ * @file Snake.hpp
+ * @brief sentimentel index defination of the Snake
+ * @author Martis
+ * @include ForTypeDef.h
+ */
 #ifndef __Snake_hpp__
 #define __Snake_hpp__
-#pragma once
-#include<stdint.h>
-#include<iostream>
-
-struct bodyRecord{
-    uint8_t x,y;
-    bool operator==(const bodyRecord& other)const;
-    
-};
+#include"../ForTypeDef.hpp"
 
 class Snake{
-private:
-    bool Alive = 1;
-    uint8_t length=1;
-    bodyRecord* ASnake;
 public:
     Snake();
     ~Snake();
     void Resize();
+    direction Direction;
+    //for ensure the snake hitten or not and move the snake
+    bool operator|=(const char** MapUsing);
+private:
+    bool Alive = 1;
+    int8 length,dx=0,dy=0;
+    bodyRecord* ASnake;
 };
 
 #endif
