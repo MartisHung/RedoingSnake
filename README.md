@@ -1,40 +1,47 @@
 # RedoingSnake
-A snake game made by C/C++
+A snake game made by C/C++  
 這是一個用 C/C++ 的貪食蛇遊戲。
 
 ## ProJect Status
 Not finish
 
-## 安裝
+## Download
 
-1. clone 存儲庫：
+1. git clone：
     ```sh
-    git clone https://github.com/yourusername/RedoingSnake.git
+    git clone https://github.com/MartisHung/RedoingSnake.git
     ```
 2. 進入專案目錄：
     ```sh
-    cd RedoingSnake
+    cd Your/dictionary/that/save/my/project/RedoingSnake
     ```
-3. 編譯程式：
+3. compile 編譯(windows)：  
+    -g++:
     ```sh
-    g++ -o snake main.cpp
+    g++ main.cpp -o Snake.exe
     ```
+    -clang++:
     ```sh
-    clang++ snake main.cpp
+    clang++ main.cpp -o Snake.exe
     ```
-
-## 使用方法
-
-1. 執行遊戲：
+    Run/Execute:
     ```sh
-    ./snake
+    ./Snake.exe
     ```
-2. 使用方向鍵控制蛇的移動。
+4. compile 編譯(Linux):  
+    -g++:
+    ```sh
+    g++ main.cpp -o Snake
+    ```
+    -clang++:
+    ```sh
+    clang++ main.cpp -o Snake
+    ```
+    run/Execute:
+    ```sh
+    ./Snake
+    ```
 
-## 貢獻
-
-歡迎提交問題和請求，或是提出改進建議。
-
-## 授權
-
-此專案採用 MIT 授權條款。詳情請參閱 [LICENSE](LICENSE) 檔案。
+## Licence
+Forbidding for any kind of financial purpose  
+禁止應用於任何形式的經濟目的
