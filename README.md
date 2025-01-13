@@ -1,9 +1,10 @@
+
+
 # RedoingSnake
 A snake game made by C/C++  
 這是一個用 C/C++ 的貪食蛇遊戲。
 
-## ProJect Status
-Not finish
+## ALART  THE PROJECT ISNT FINISH PLEASE DONT DOWNLOAD THANKS
 
 ## Download
 

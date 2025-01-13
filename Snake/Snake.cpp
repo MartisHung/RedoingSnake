@@ -1,5 +1,5 @@
 #include"Snake.hpp"
-//if hitten
+//for ensure the snake hitten or not and move the snake
 bool Snake::operator|=(const char** MapUsing){
     switch(Direction){
         case(direction::forward):   dx=0; dy=-1;break;
