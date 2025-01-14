@@ -1,4 +1,4 @@
-#include "Map.hpp"
+#include "Map.h"
 
 Map::Map(){
     write(1,(char*)"press the arrow to select the Map\nAnd press enter to play",58);
@@ -114,24 +114,22 @@ void Map::MapTransfer(char** MapUsing,int8 MapSelected) const {
 
     switch( MapSelected & 0b1111){
         case 0b00:
-            for(int8 i=0;i<MAX_OF_MAP_1_Y;i++){MapUsing[i] = new char [MAX_OF_MAP_X+1]; MapCoping(Map1[i],MapUsing[i]);}break;
+            for(int8 i=0;i<MAX_OF_MAP_1_Y;i++){MapUsing[i] = new char [MAX_OF_MAP_X+1]; MapCoping(Map1[i],MapUsing[i]);} break;
         case 0b01:
-            for(int8 i=0;i<MAX_OF_MAP_2_Y;i++){MapUsing[i] = new char [MAX_OF_MAP_X+1]; MapCoping(Map2[i],MapUsing[i]);}break;
+            for(int8 i=0;i<MAX_OF_MAP_2_Y;i++){MapUsing[i] = new char [MAX_OF_MAP_X+1]; MapCoping(Map2[i],MapUsing[i]);} break;
         case 0b10:
-            for(int8 i=0;i<MAX_OF_MAP_3_Y;i++){MapUsing[i] = new char [MAX_OF_MAP_X+1]; MapCoping(Map3[i],MapUsing[i]);}break;
+            for(int8 i=0;i<MAX_OF_MAP_3_Y;i++){MapUsing[i] = new char [MAX_OF_MAP_X+1]; MapCoping(Map3[i],MapUsing[i]);} break;
         case 0b11:
-            for(int8 i=0;i<MAX_OF_MAP_4_Y;i++){MapUsing[i] = new char [MAX_OF_MAP_X+1]; MapCoping(Map4[i],MapUsing[i]);}break;
+            for(int8 i=0;i<MAX_OF_MAP_4_Y;i++){MapUsing[i] = new char [MAX_OF_MAP_X+1]; MapCoping(Map4[i],MapUsing[i]);} break;
     }
-    
-    return;
 }
 
 void Map::ShowMap(char** MapUsing,int8 MapSelect)const{
-    switch(MapSelect){
-        case 0:for(int8 i=0;i<MAX_OF_MAP_1_Y;i++)write(1,MapUsing[i],MAX_OF_MAP_X);break;
-        case 1:for(int8 i=0;i<MAX_OF_MAP_2_Y;i++)write(1,MapUsing[i],MAX_OF_MAP_X);break;
-        case 2:for(int8 i=0;i<MAX_OF_MAP_3_Y;i++)write(1,MapUsing[i],MAX_OF_MAP_X);break;
-        case 3:for(int8 i=0;i<MAX_OF_MAP_4_Y;i++)write(1,MapUsing[i],MAX_OF_MAP_X);break;
+    switch(MapSelect & 0b1111){
+        case 0b00:for(int8 i=0;i<MAX_OF_MAP_1_Y;i++)write(1,MapUsing[i],MAX_OF_MAP_X);break;
+        case 0b01:for(int8 i=0;i<MAX_OF_MAP_2_Y;i++)write(1,MapUsing[i],MAX_OF_MAP_X);break;
+        case 0b10:for(int8 i=0;i<MAX_OF_MAP_3_Y;i++)write(1,MapUsing[i],MAX_OF_MAP_X);break;
+        case 0b11:for(int8 i=0;i<MAX_OF_MAP_4_Y;i++)write(1,MapUsing[i],MAX_OF_MAP_X);break;
     }
 }
 
@@ -167,8 +165,5 @@ Map::~Map() {
     for(int8 i=0;i<MAX_OF_MAP_2_Y;i++) delete[] Map2[i];
     for(int8 i=0;i<MAX_OF_MAP_3_Y;i++) delete[] Map3[i];
     for(int8 i=0;i<MAX_OF_MAP_4_Y;i++) delete[] Map4[i];
-    delete[] Map1;
-    delete[] Map2;
-    delete[] Map3;
-    delete[] Map4;
+    delete[] Map1;delete[] Map2;delete[] Map3;delete[] Map4;
 }

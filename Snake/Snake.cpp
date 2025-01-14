@@ -1,4 +1,4 @@
-#include "Snake.hpp"
+#include "Snake.h"
 // for ensure the snake hitten or not and move the snake
 bool Snake::operator|=(const char **MapUsing) {
     switch (Direction) {
@@ -8,23 +8,32 @@ bool Snake::operator|=(const char **MapUsing) {
     case (direction::right):    dx = 1; dy = 0; break;
     }
     for (int8 i = 0; i < length; i++) {
-        if (MapUsing[ASnake[i].y + dy][ASnake[i].x + dx] == '#' ||
-            MapUsing[ASnake[i].y + dy][ASnake[i].x + dx] == 'P' ||
-            MapUsing[ASnake[i].y + dy][ASnake[i].x + dx] == 'E' ||
-            MapUsing[ASnake[i].y + dy][ASnake[i].x + dx] == 'H') {
+        if (MapUsing[location[i].a.y + dy][location[i].a.x + dx] == '#' ||
+            MapUsing[location[i].a.y + dy][location[i].a.x + dx] == 'P' ||
+            MapUsing[location[i].a.y + dy][location[i].a.x + dx] == 'E' ||
+            MapUsing[location[i].a.y + dy][location[i].a.x + dx] == 'H') {
             Alive = 0;
         }
         else {
-            ASnake[0].x += dx;ASnake[0].y = dy;
-            for (int8 i = 1; i < length; i++) {
-                ASnake[i].x = ASnake[i - 1].x;ASnake[i].y = ASnake[i - 1].y;
-            }
+            location[0].a.x += dx;location[0].a.y = dy;
+            for (int8 i = 1; i < length; i++) location[i].ll = location[i - 1].ll;
         }
     }
 }
 
-Snake::Snake() {}
+Snake::Snake() {
+    SnakeLocate *location = new SnakeLocate[1]; location[0].ll = 0x1010;
+}
 
-Snake::~Snake() {}
+Snake::~Snake() {
+    delete[] location;
+}
 
-void Snake::Resize() {}
+void Snake::Resize() {
+    length++;
+    SnakeLocate *tempory = new SnakeLocate[length];
+    for(int8 i=0;i<length-1;i++) tempory[i].ll=location[i].ll;
+    delete[] location; location = tempory;
+    if(tempory!=nullptr) tempory = nullptr;
+    
+}

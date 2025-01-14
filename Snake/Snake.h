@@ -4,10 +4,9 @@
  * @author Martis
  * @include ForTypeDef.h
  */
-
-#ifndef __Snake_hpp__
-#define __Snake_hpp__
-#include "../ForTypeDef.hpp"
+#ifndef __SNAKE_H__
+#define __SNAKE_H__
+#include "../ForTypeDef.h"
 
 class Snake {
   public:
@@ -15,14 +14,13 @@ class Snake {
     ~Snake();
     void Resize();
     direction Direction;
-    // for ensure the snake hitten or not.and move the snake
     bool operator|=(const char **MapUsing);
 
   private:
-    bool Alive = 1,foodeated = 0;
-    short length;
+    int16 length;
     int8 dx = 0, dy = 0;
-    bodyRecord *ASnake;
+    SnakeLocate *location = nullptr;
+    bool Alive = 1, foodeated = 0;
 };
 
 #endif

@@ -1,11 +1,6 @@
+
 #ifndef __Map_H__
 #define __MAP_H__
-
-#include "../ArrowInitilization.hpp"
-#include "../ForTypeDef.hpp"
-#include "../Snake/Snake.hpp"
-#include <unistd.h>
-#include <stdio.h>
 
 #define MAX_OF_MAP_X 0x41
 
@@ -13,6 +8,12 @@
 #define MAX_OF_MAP_2_Y 0x15
 #define MAX_OF_MAP_3_Y 0x15
 #define MAX_OF_MAP_4_Y 0x17
+
+#include "../ArrowInitilization.hpp"
+#include "../ForTypeDef.h"
+#include "../Snake/Snake.h"
+#include <unistd.h>
+#include <stdio.h>
 
 class Map : public Snake{
 public:

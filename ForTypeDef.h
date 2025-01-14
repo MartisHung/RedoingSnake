@@ -2,12 +2,12 @@
  * @author Martis
  * @brief Defination of some own types
  */
-#ifndef __FOR_TYPEDEF_HPP__
-#define __FOR_TYPEDEF_HPP__
+#ifndef __FOR_TYPEDEF_H__
+#define __FOR_TYPEDEF_H__
 
 typedef char int8;
-typedef char bool_array;
 typedef short int16;
+typedef char bool_array;
 
 enum class direction : int8 {
     forward = 0x1,
@@ -16,7 +16,9 @@ enum class direction : int8 {
     right = 0x4
 };
 
-struct bodyRecord {
-    int8 x, y;
+union SnakeLocate{
+    int16 ll;
+    struct bodyRecord { int8 x, y;}a;
 };
+
 #endif
