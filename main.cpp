@@ -2,37 +2,30 @@
  * @file main.cpp
  * @brief Main Function
  * @author Martis
- * @include Dictionary : Snake & Map | File : ForTypeDef.h & ArrowInitization.h| LibC :time.h stdlib.h
- * @copyright 2024 Martis,the codes forbid financial purpose,self using or educational purpose are allow
+ * @include Dictionary : Snake & Map | File : ForTypeDef.h & ArrowInitization.h|
+ * LibC :time.h stdlib.h
+ * @copyright 2024 Martis,the codes forbid financial purpose,self using or
+ * educational purpose are allow
  */
-#include<time.h>
-#include<stdlib.h>
-#include"Snake/Snake.hpp"
-#include"Map/Map.hpp"
-#include"ArrowInitilization.hpp"
+#include "ArrowInitilization.hpp"
+#include "Map/Map.hpp"
+#include "Snake/Snake.hpp"
+#include <stdlib.h>
+#include <time.h>
 
-int main(){
+int main() {
     srand(time(NULL));
     /**
      *@brief Map select
+     *@param MapSelected : the high four bit is the map elder selected
      */
-    if(_kbhit()){
-        char ch = _getch();
-        int8 MapSelected=0;
-        switch(ch){
-            case 'a':{if(MapSelected==0){MapSelected=3;}else{MapSelected--;} break;}
-            case 'd':{if(MapSelected==3){MapSelected=0;}else{MapSelected++;} break;}
-            case '-32':{
-                ch = _getch();
-                switch(ch){
-                    case 75:if(MapSelected==0){MapSelected=3;}else{MapSelected--;}
-                    case 77:if(MapSelected==3){MapSelected=0;}else{MapSelected--;}
-                }
-            }
+    int8 MapSelected = 0;
+    Map player1;
+    player1.MapSelecting(&MapSelected);
+    bool IDK_RN;
+    while (1) {
+        if (IDK_RN) {
+            break;
         }
-    }
-    
-    while(1){
-        
     }
 }

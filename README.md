@@ -1,10 +1,11 @@
-
-
 # RedoingSnake
 A snake game made by C/C++  
 這是一個用 C/C++ 的貪食蛇遊戲。
 
-## ALART  THE PROJECT ISNT FINISH PLEASE DONT DOWNLOAD THANKS
+## Project Status
+Not finished
+
+## Alert: The Project Isn't Finished, Please Don't Download. Thanks  
 不要下載!!!!
 
 ## Download
@@ -15,14 +16,14 @@ A snake game made by C/C++
     ```
 2. 進入專案目錄：
     ```sh
-    cd Your/dictionary/that/save/my/project/RedoingSnake
+    cd RedoingSnake
     ```
 3. compile 編譯(windows)：  
-    -g++:
+    - g++:
     ```sh
     g++ main.cpp -o Snake.exe
     ```
-    -clang++:
+    - clang++:
     ```sh
     clang++ main.cpp -o Snake.exe
     ```
@@ -31,11 +32,11 @@ A snake game made by C/C++
     ./Snake.exe
     ```
 4. compile 編譯(Linux):  
-    -g++:
+    - g++:
     ```sh
     g++ main.cpp -o Snake
     ```
-    -clang++:
+    - clang++:
     ```sh
     clang++ main.cpp -o Snake
     ```
