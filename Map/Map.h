@@ -19,22 +19,128 @@ class Map : public Snake{
 public:
     Map();
     ~Map();
-    void MapSelecting(int8 *MapSelected)const;
-    void MapCoping(const char* map1,char* map2)const;
-    void ShowMap(char **MapUsing, int8 MapSelected)const;
-    void MapTransfer(char **MapUsing, int8 MapSelect) const;
-
+    void ShowMap();
+    void MapTransfer();
+    void MapSelecting();
+    void MapCoping(int8 i);
 private:
+    /// @param MapSelect the map rn using
+    char** MapUsing = nullptr;
     // each bit represent a map finish or not
     // bool_array EnsureTheMapFinish = 0b0000;
-    
-    // Map reference btw perhaps i should not use new - delete
-    const char **Map1 = new char *[MAX_OF_MAP_1_Y];
-    const char **Map2 = new char *[MAX_OF_MAP_2_Y];
-    const char **Map3 = new char *[MAX_OF_MAP_3_Y];
-    const char **Map4 = new char *[MAX_OF_MAP_4_Y];
+    /**
+     * @param MapSelect
+     * high 4 bit represent the elder map selected 
+     * low 4 bit represent the map now selected
+     */
+    bool_array MapSelect = 0b00000000;
+    //Map reference
+    static const char Map1[MAX_OF_MAP_1_Y][MAX_OF_MAP_X];
+    static const char Map2[MAX_OF_MAP_2_Y][MAX_OF_MAP_X];
+    static const char Map3[MAX_OF_MAP_3_Y][MAX_OF_MAP_X];
+    static const char Map4[MAX_OF_MAP_4_Y][MAX_OF_MAP_X];
 };
 
+const char Map::Map1[][MAX_OF_MAP_X]={
+    "################################################################\n",
+    "#                                                              #\n",
+    "#                                                              #\n",
+    "#                                                              #\n",
+    "#                                                              #\n",
+    "#                                                              #\n",
+    "#                                                              #\n",
+    "#                                                              #\n",
+    "#                                                              #\n",
+    "#                                                              #\n",
+    "#                                                              #\n",
+    "#                                                              #\n",
+    "#                                                              #\n",
+    "#                                                              #\n",
+    "#                                                              #\n",
+    "#                                                              #\n",
+    "#                                                              #\n",
+    "#                                                              #\n",
+    "#                                                              #\n",
+    "#                                                              #\n",
+    "#                                                              #\n",
+    "#                                                              #\n",
+    "################################################################\n"  
+};
 
+static const char Map2[][MAX_OF_MAP_X] = {
+    "################################################################\n",
+    "#                                                              #\n",
+    "#   ##   ##      ##########       ##########      ##   ##      #\n",
+    "#                #        #       #        #                   #\n",
+    "#   ##   ##      #  ####  #       #  ####  #      ##   ##      #\n",
+    "#                #  #T #  #       #  #F #  #                   #\n",
+    "#   #  ####  #   #  #  #  #########  #  #  #   #  ####  #      #\n",
+    "#   #        #   #  #                   #  #   #        #      #\n",
+    "#   #  ####  #   #  #####################  #   #  ####  #      #\n",
+    "#   #        #   #                         #   #        #      #\n",
+    "#      ####      ###########################      ####         #\n",
+    "#                                                              #\n",
+    "#      ####      ####    ####   ####    ####      ####         #\n",
+    "#                  #                     #                     #\n",
+    "#   ##   ##        #  ####   ###   ####  #        ##   ##      #\n",
+    "#                     #T      #      F#                        #\n",
+    "#   ##   ##           #  #    #    #  #           ##   ##      #\n",
+    "#                        #         #                           #\n",
+    "#   ####  ####           #         #           ####  ####      #\n",
+    "#                  #                     #                     #\n",
+    "################################################################\n"
+};
+
+static const char Map3[][MAX_OF_MAP_X] = {
+    "################################################################\n",
+    "#                                                              #\n",
+    "#   ####   ##################    #####   ####                  #\n",
+    "#   #                                                          #\n",
+    "#   #  ######    ###########     #####                         #\n",
+    "#   #                                                          #\n",
+    "#   #######        #########     #####   #####       #######   #\n",
+    "#                 #                                            #\n",
+    "#   #######       #               ####   ####        #######   #\n",
+    "#   #             #                                            #\n",
+    "#   #   ###    ####             ######   ######      ########  #\n",
+    "#   #                                                          #\n",
+    "#   #######    #######       #########   #########   ###########\n",
+    "#                                                              #\n",
+    "#   #######    #######      ##########   ##########            #\n",
+    "#                                                              #\n",
+    "#   ##########        ################                         #\n",
+    "#                                                              #\n",
+    "#   ###########          ###########        ###########        #\n",
+    "#   #                                                          #\n",
+    "#   #   ###############################   #################    #\n",
+    "#   #                                                          #\n",
+    "################################################################\n"
+};
+
+static const char Map4[][MAX_OF_MAP_X]={
+    "################################################################\n",
+    "#                                                              #\n",
+    "#                                                              #\n",
+    "#                                                              #\n",
+    "#    ##                                                        #\n",
+    "#     #                                                        #\n",
+    "#     ##           ###################C                #       #\n",
+    "#     ##         #####################                #        #\n",
+    "#      ##       #########                            #         #\n",
+    "#      ##      #######                              #          #\n",
+    "#       ##    ######                    ############           #\n",
+    "#       #################         ########################     #\n",
+    "#        #    C#########T         ##D                #  B#     #\n",
+    "#        ##     #########         ##                 #   #     #\n",
+    "#        ##        T####          ##                 #   #     #\n",
+    "#        ################         ##                 #   #     #\n",
+    "#                ##               ##                 #   #     #\n",
+    "#                ##               ##                 #D  #     #\n",
+    "#              ######             ########################     #\n",
+    "#             ##    ##            B#######################     #\n",
+    "#                                                              #\n",
+    "#                                                              #\n",
+    "################################################################\n"
+};
 
 #endif//__Map_H__

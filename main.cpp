@@ -16,7 +16,6 @@ int main() {
     
     Map player1;
     int8 MapSelected = 0;
-    player1.MapSelecting(&MapSelected);
     bool IDK_RN;
     while (1) {
         if (IDK_RN) {
