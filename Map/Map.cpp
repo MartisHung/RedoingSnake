@@ -3,15 +3,24 @@
 #include <conio.h>
 //class Map :pub Snake
 //2
-Map::Map(){
-    _write(1,(char*)"press the arrow to select the Map\nAnd press enter to play\n",58);
+Map::Map() {
+    _write(1, (char*)"press the arrow to select the Map\nAnd press enter to play\n", 58);
     MapSelecting();
     MapTransfer();
-    _write(1,"Map Select finish the game is going to start\n",46);
-
+    _write(1, "Map Select finish the game is going to start\n", 46);
 }
+
 //3
 Map::~Map() {
+    if (MapUsing != nullptr) {
+        switch (MapSelect >> 4) {
+            case 0b00: for (int8 i = 0; i < MAX_OF_MAP_1_Y; i++) { delete[] MapUsing[i]; } break;
+            case 0b01: for (int8 i = 0; i < MAX_OF_MAP_2_Y; i++) { delete[] MapUsing[i]; } break;
+            case 0b10: for (int8 i = 0; i < MAX_OF_MAP_3_Y; i++) { delete[] MapUsing[i]; } break;
+            case 0b11: for (int8 i = 0; i < MAX_OF_MAP_4_Y; i++) { delete[] MapUsing[i]; } break;
+        }
+        delete[] MapUsing;
+    }
 }
 
 void Map::MapTransfer() {
