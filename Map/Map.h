@@ -1,8 +1,7 @@
-
 #ifndef __MAP_H__
 #define __MAP_H__
 
-#define MAX_OF_MAP_X 0x42 //記得換回0x41
+#define MAX_OF_MAP_X 0x42 // 記得換回0x41
 
 #define MAX_OF_MAP_1_Y 0x18
 #define MAX_OF_MAP_2_Y 0x15
@@ -11,27 +10,27 @@
 
 #include "../ArrowInitilization.h"
 #include "../ForTypeDef.h"
-#include "../Snake/Snake.h"
 #include <io.h>
 #include <stdio.h>
 
-class Map : public Snake{
-public:
+class Map {
+  public:
     Map();
     ~Map();
     void ShowMap();
     void MapTransfer();
     void MapSelecting();
     void MapCoping(int8 i);
-private:
+
+  private:
     /// @param MapSelect the map rn using
-    char** MapUsing = nullptr;
+    char **MapUsing = nullptr;
     ///@param MapSelect
     ///@brief 0b0000 0000 @n
     ///@brief high 4 bit elder map selected | low 4 bit rn map selected
     bool_array MapSelect = 0b00000000;
-    //Map reference Map1/Map2/Map3/Map4
-    static constexpr char Map1[MAX_OF_MAP_1_Y][MAX_OF_MAP_X]={
+    // Map reference Map1/Map2/Map3/Map4
+    static constexpr char Map1[MAX_OF_MAP_1_Y][MAX_OF_MAP_X] = {
         "################################################################\n",
         "#                                                              #\n",
         "#                                                              #\n",
@@ -54,9 +53,8 @@ private:
         "#                                                              #\n",
         "#                                                              #\n",
         "#                                                              #\n",
-        "################################################################\n"
-    };
-    static constexpr char Map2[MAX_OF_MAP_2_Y][MAX_OF_MAP_X]={
+        "################################################################\n"};
+    static constexpr char Map2[MAX_OF_MAP_2_Y][MAX_OF_MAP_X] = {
         "################################################################\n",
         "#                                                              #\n",
         "#   ##   ##      ##########       ##########      ##   ##      #\n",
@@ -77,9 +75,8 @@ private:
         "#                        #         #                           #\n",
         "#   ####  ####           #         #           ####  ####      #\n",
         "#                  #                     #                     #\n",
-        "################################################################\n"
-    };
-    static constexpr char Map3[MAX_OF_MAP_3_Y][MAX_OF_MAP_X]={
+        "################################################################\n"};
+    static constexpr char Map3[MAX_OF_MAP_3_Y][MAX_OF_MAP_X] = {
         "################################################################\n",
         "#                                                              #\n",
         "#   ####   ##################    #####   ####                  #\n",
@@ -102,9 +99,8 @@ private:
         "#   #                                                          #\n",
         "#   #   ###############################   #################    #\n",
         "#   #                                                          #\n",
-        "################################################################\n"
-    };
-    static constexpr char Map4[MAX_OF_MAP_4_Y][MAX_OF_MAP_X]={
+        "################################################################\n"};
+    static constexpr char Map4[MAX_OF_MAP_4_Y][MAX_OF_MAP_X] = {
         "################################################################\n",
         "#                                                              #\n",
         "#                                                              #\n",
@@ -127,8 +123,7 @@ private:
         "#             ##    ##            B#######################     #\n",
         "#                                                              #\n",
         "#                                                              #\n",
-        "################################################################\n"
-    };
+        "################################################################\n"};
 };
 
-#endif//__Map_H__
+#endif //__Map_H__
