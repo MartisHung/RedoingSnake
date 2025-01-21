@@ -1,7 +1,11 @@
-#ifndef __ARROW_INIT_H__
-#define __ARROW_INIT_H__
+#ifndef __FOR_CROSS_PLATFORM_H__
+#define __FOR_CROSS_PLATFORM_H__
     #if defined(__WIN32) || defined(__WIN64)
         #include <conio.h>
+        #include <windows.h>
+        void TemporyKeyboardSetting(){
+            HKL hkl = LoadKeyboardLayout(L"00000409", KLF_ACTIVATE);
+        }
     #elif defined(__linux__) || defined(__APPLE__)
         #include <fcntl.h>
         #include <termios.h>
@@ -36,5 +40,9 @@
             }
             return 0;
         }
+        void TemporyKeyboardSetting(){
+            bool result = system("setxkbmap us");
+            (result)?printf("success\n"):printf("failed\n");
+        }
     #endif
-#endif//__ARROW_INIT_H__
+#endif//__FOR_CROSS_PLATFORM_H__

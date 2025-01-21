@@ -1,5 +1,29 @@
 #include "Snake.h"
 #include "../Map/Map.h"
+
+Snake::Snake(bool_array MapSelect,char **MapUsing) {
+    SnakeLocate *location = new SnakeLocate[1];
+    do{
+        location[0].a.x = rand()%MAX_OF_MAP_X;
+        switch (MapSelect & 0x7) {
+            case 0x0: location[0].a.y = rand() % MAX_OF_MAP_1_Y; break;
+            case 0x1: location[0].a.y = rand() % MAX_OF_MAP_2_Y; break;
+            case 0x2: location[0].a.y = rand() % MAX_OF_MAP_3_Y; break;
+            case 0x3: location[0].a.y = rand() % MAX_OF_MAP_4_Y; break;
+        }
+    }while (
+        (MapSelect & 0x7) == 0x0 && MapUsing[location[0].a.y][location[0].a.x] != '#' ||
+        (MapSelect & 0x7) == 0x1 && MapUsing[location[0].a.y][location[0].a.x] != '#' ||
+        (MapSelect & 0x7) == 0x2 && MapUsing[location[0].a.y][location[0].a.x] != '#' ||
+        (MapSelect & 0x7) == 0x3 && MapUsing[location[0].a.y][location[0].a.x] != '#'
+        );
+        
+}
+
+Snake::~Snake() {
+    delete[] location;
+    _write(1,"\nhi", 3);
+}
 // for ensure the snake hitten or not and move the snake
 bool Snake::operator^=(const char **MapUsing) {
     switch (Direction) {
@@ -21,16 +45,6 @@ bool Snake::operator^=(const char **MapUsing) {
         }
     }
     return For_Snake;
-}
-// 1
-Snake::Snake() {
-    SnakeLocate *location = new SnakeLocate[1];
-    _write(1,(char*)"haha\n",5);
-}
-// 4
-Snake::~Snake() {
-    delete[] location;
-    _write(1, (char*)"\nhi", 3);
 }
 
 void Snake::Resize() {

@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "fuck MicroSoft",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/Snake.Game.clang.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true,
+            "preLaunchTask": "Build Snake Game"
+        }
+    ]
+}

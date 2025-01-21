@@ -6,14 +6,15 @@
  */
 #ifndef __SNAKE_H__
 #define __SNAKE_H__
+
 #include "../ForTypeDef.h"
-#include "../Map/Map.h"
+// #include "../Map/Map.h"
 #include <stdlib.h>
 #include <io.h>
 
 class Snake {
   public:
-    Snake();
+    Snake(bool_array MapSelect,char **MapUsing);
     ~Snake();
     void Resize();
     direction Direction;
