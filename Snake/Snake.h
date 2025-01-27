@@ -11,15 +11,18 @@
 // #include "../Map/Map.h"
 #include <stdlib.h>
 #include <io.h>
-
+class Map;
 class Snake {
+  
   public:
     Snake(bool_array MapSelect,char **MapUsing);
     ~Snake();
     void Resize();
+    void ShowOnMap(char **MapUsing);
+    bool operator==(std::nullptr_t)const;
+    bool operator^=(char **MapUsing);
+    void moving(char **MapUsing);
     direction Direction;
-    ///@param operator^= for ensure the snake hitten or not and move the snake
-    bool operator^=(const char **MapUsing);
   private:
     int16 length;
     int8 dx = 0, dy = 0;

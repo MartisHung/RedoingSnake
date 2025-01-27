@@ -23,6 +23,7 @@ namespace Map_Scorpe{
             void MapTransfer();
             void MapSelecting();
             void MapCoping(int8 i);
+            void ShowMap(std::nullptr_t);
         private:
             /// @param MapUsing the map rn using
             char** MapUsing = nullptr;
