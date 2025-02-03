@@ -10,6 +10,7 @@ typedef short int16;
 typedef char bool_array;
 
 enum class direction : int8 {
+    UNDEFINED = 0x0,
     forward = 0x1,
     backward = 0x2,
     left = 0x3,
@@ -18,7 +19,7 @@ enum class direction : int8 {
 
 union SnakeLocate{
     int16 ll;
-    struct bodyRecord { int8 x, y;}a;
+    struct bodyRecord { int8 x;int8 y;}a;
 };
 
 #endif

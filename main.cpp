@@ -13,7 +13,6 @@
 
 int main() {
     srand(time(NULL));
-    
-    Map_Scorpe::Map player1;
-
+    TemporyKeyboardSetting();
+    Map player1;
 }

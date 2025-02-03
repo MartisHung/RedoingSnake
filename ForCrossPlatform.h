@@ -1,11 +1,8 @@
 #ifndef __FOR_CROSS_PLATFORM_H__
 #define __FOR_CROSS_PLATFORM_H__
-    #if defined(__WIN32) || defined(__WIN64)
+    #if defined(_WIN32) || defined(_WIN64)
         #include <conio.h>
         #include <windows.h>
-        void TemporyKeyboardSetting(){
-            HKL hkl = LoadKeyboardLayout(L"00000409", KLF_ACTIVATE);
-        }
     #elif defined(__linux__) || defined(__APPLE__)
         #include <fcntl.h>
         #include <termios.h>
@@ -40,9 +37,15 @@
             }
             return 0;
         }
-        void TemporyKeyboardSetting(){
+    #endif
+
+    inline void TemporyKeyboardSetting() {
+        #if defined(_WIN32) || defined(_WIN64)
+            HKL hkl = LoadKeyboardLayoutW(L"00000409", KLF_ACTIVATE);
+        #elif defined(__linux__) || defined(__APPLE__)
             bool result = system("setxkbmap us");
             (result)?printf("success\n"):printf("failed\n");
-        }
-    #endif
-#endif//__FOR_CROSS_PLATFORM_H__
+        #endif
+    }
+
+#endif // __FOR_CROSS_PLATFORM_H__

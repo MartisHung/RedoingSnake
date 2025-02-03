@@ -13,23 +13,25 @@
 #include <io.h>
 class Map;
 class Snake {
-  
   public:
-    Snake(bool_array MapSelect,char **MapUsing);
+    Snake(bool_array MapSelect,char **MapUsing,decltype(nullptr));
+    Snake(bool_array MapSelect,char **MapUsing,int)=delete;
+    Snake(char** MapUsing);
     ~Snake();
     void Resize();
-    void ShowOnMap(char **MapUsing);
-    bool operator==(std::nullptr_t)const;
-    bool operator^=(char **MapUsing);
-    void moving(char **MapUsing);
+    bool operator==(decltype(nullptr))const;
+    void operator^=(char **MapUsing);
+    void getMovement(char ch);
     direction Direction;
   private:
+    int8 dx,dy;
     int16 length;
-    int8 dx = 0, dy = 0;
-    SnakeLocate *location = nullptr;
-    ///@param For_Snake 
-    ///@brief 1:alive 2: foodeated
-    ///else: tempory null
+    SnakeLocate *location;
+    /**
+     * @param For_Snake 
+     * @brief 3 bit:player/_Robot_ 2 bit:alive 1 bit: foodeated
+     * @brief else: null
+     */
     bool_array For_Snake = 0b10;
 };
 

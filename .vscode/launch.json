@@ -2,15 +2,24 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "fuck MicroSoft",
+            "name": "Launch Snake Game",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/Snake.Game.clang.exe",
+            "program": "${workspaceFolder}/Snake.Game.g++.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": true,
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb", // 確保 gdb 在你的 PATH 中
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
             "preLaunchTask": "Build Snake Game"
         }
     ]
