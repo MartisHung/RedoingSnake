@@ -10,7 +10,7 @@
 #include "Map/Map.h"
 #include <stdlib.h>
 #include <time.h>
-
+//TODO : food generate | bot moving logic 
 int main() {
     srand(time(NULL));
     TemporyKeyboardSetting();

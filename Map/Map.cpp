@@ -1,9 +1,9 @@
 #include "Map.h"
 #include "../Snake/Snake.h"
 #include <conio.h>
-#include <iostream>
 #include <chrono>
 #include <thread>
+#include <iostream>
 
 Map::Map(){
     _write(1,"press the arrow to select the Map\nAnd press enter to play\n",58);
@@ -11,8 +11,11 @@ Map::Map(){
     _write(1,"Map Select finished ,after pressing WASD or arrow key will start\n", 65);
     Snake *Player=new Snake(MapSelect,MapUsing,nullptr);
     ShowMap(nullptr);
-    while(!_kbhit()) continue;
-    Player->getMovement(_getch());
+    do{
+        while(!_kbhit())continue;
+        if(Player->getMovement(_getch()))break;
+        printf("error the key you press is neither arrow nor WASD");
+    }while(1);
     //Scan is alive or not (opertor have been overloaded)
     while(Player->operator==(nullptr)){
         printf("\033[2J\033[H");
@@ -73,8 +76,8 @@ void Map::MapSelecting(){
             printf("\033[2J\033[H");
             ch = _getch();
             switch(ch){
-                case 'a':{if((MapSelect&0x3)==0x0){MapSelect|=0x3;}else{MapSelect--;} ShowMap();break;}
-                case 'd':{if((MapSelect&0x3)==0x3){MapSelect&=0x0;}else{MapSelect++;} ShowMap();break;}
+                case 'A':case 'a':{if((MapSelect&0x3)==0x0){MapSelect|=0x3;}else{MapSelect--;} ShowMap();break;}
+                case 'D':case 'd':{if((MapSelect&0x3)==0x3){MapSelect&=0x0;}else{MapSelect++;} ShowMap();break;}
                 case (char)0xE0:{
                     ch = _getch();
                     switch(ch){
@@ -88,6 +91,15 @@ void Map::MapSelecting(){
     } while(ch!='q');
     Map::MapTransfer();
 }
+
+void Map::foodGenerate() {
+    int8 x,y;
+    do{
+        x=rand()%MAX_OF_MAP_X;
+        y=rand()%0x17;
+    }while(MapUsing[y][x]!=' ');
+    MapUsing[y][x]='.';
+}   
 
 //(Asm) MOV map2,map1
 void Map::MapCoping(int8 i) {
