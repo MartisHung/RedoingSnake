@@ -11,8 +11,8 @@
                 "Map/Map.cpp",
                 "-o",
                 "Snake.Game.clang++.exe",
-                "-O2"
-                //, "-lUser32"
+                "-O2",
+                "-lUser32"
             ],
             "group": {
                 "kind": "build",

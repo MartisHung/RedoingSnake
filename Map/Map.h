@@ -25,7 +25,6 @@ class Map {
         void MapCoping(int8 i);
         void MapSelecting();
         void foodGenerate();
-        int8 addingTimes=0;
         ///@param MapSelect
         ///@brief 0b0000 0000 @n
         ///@brief high 4 bit elder map selected | low 4 bit rn map selected
