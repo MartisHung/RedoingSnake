@@ -2,7 +2,7 @@
 #ifndef __MAP_H__
 #define __MAP_H__
 
-#define MAX_OF_MAP_X 0x42 //記得換回0x41
+#define MAX_OF_MAP_X 0x42
 
 #define MAX_OF_MAP_1_Y 0x17
 #define MAX_OF_MAP_2_Y 0x15
@@ -31,7 +31,7 @@ class Map {
         ///@brief high 4 bit elder map selected | low 4 bit rn map selected
         bool_array MapSelect = 0b00000000;
         //Map reference Map1/Map2/Map3/Map4 | 0x0 0x1 0x2 0x3
-        static constexpr char Map1[MAX_OF_MAP_1_Y][MAX_OF_MAP_X]={
+        inline static constexpr char Map1[MAX_OF_MAP_1_Y][MAX_OF_MAP_X]={
             "################################################################\n",
             "#                                                              #\n",
             "#                                                              #\n",
@@ -56,7 +56,7 @@ class Map {
             "#                                                              #\n",
             "################################################################\n"
         };
-        static constexpr char Map2[MAX_OF_MAP_2_Y][MAX_OF_MAP_X]={
+        inline static constexpr char Map2[MAX_OF_MAP_2_Y][MAX_OF_MAP_X]={
             "################################################################\n",
             "#                                                              #\n",
             "#   ##   ##      ##########       ##########      ##   ##      #\n",
@@ -79,7 +79,7 @@ class Map {
             "#                  #                     #                     #\n",
             "################################################################\n"
         };
-        static constexpr char Map3[MAX_OF_MAP_3_Y][MAX_OF_MAP_X]={
+        inline static constexpr char Map3[MAX_OF_MAP_3_Y][MAX_OF_MAP_X]={
             "################################################################\n",
             "#                                                              #\n",
             "#   ####   ##################    #####   ####                  #\n",
@@ -104,7 +104,7 @@ class Map {
             "#   #                                                          #\n",
             "################################################################\n"
         };
-        static constexpr char Map4[MAX_OF_MAP_4_Y][MAX_OF_MAP_X]={
+        inline static constexpr char Map4[MAX_OF_MAP_4_Y][MAX_OF_MAP_X]={
             "################################################################\n",
             "#                                                              #\n",
             "#                                                              #\n",

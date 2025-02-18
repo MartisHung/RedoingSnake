@@ -1,5 +1,5 @@
 /**
- * @file Snake.hpp
+ * @file Snake.c
  * @brief sentimentel index defination of the Snake
  * @author Martis
  * @include ForTypeDef.h
@@ -10,8 +10,7 @@
 #include "../ForTypeDef.h"
 // #include "../Map/Map.h"
 #include <stdlib.h>
-#include <io.h>
-class Map;
+
 class Snake {
   public:
     Snake(bool_array MapSelect,char **MapUsing,decltype(nullptr));

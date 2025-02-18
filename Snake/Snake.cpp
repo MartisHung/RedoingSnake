@@ -1,9 +1,14 @@
 #include "Snake.h"
 #include "../Map/Map.h"
-#include <conio.h>
-#include <io.h>
+#include "../ForCrossPlatform.h"
 #include <stdio.h>
 #include <stdlib.h>
+#if defined(__linux__) || defined(__APPLE__)
+    #include <unistd.h>
+    #define _write write
+#elif defined(__WIN32__)
+    #include <io.h>
+#endif
 /**
  * @brief Construct a new Snake:: Snake object
  * @param Snake(MapSelect-MapUsing-nullptr) Player Snake
@@ -71,10 +76,10 @@ void Snake::operator^=(char **MapUsing) {
 
     if (MapUsing[location[0].a.y][location[0].a.x] == '.') { For_Snake |= 0b01; this->Resize();}
     switch (Direction) {
-    case direction::forward:    dx = 0;dy =-1;break;
-    case direction::backward:   dx = 0;dy = 1;break;
-    case direction::left:       dx =-1;dy = 0;break;
-    case direction::right:      dx = 1;dy = 0;break;
+        case direction::forward:    dx = 0;dy =-1;break;
+        case direction::backward:   dx = 0;dy = 1;break;
+        case direction::left:       dx =-1;dy = 0;break;
+        case direction::right:      dx = 1;dy = 0;break;
     }
 }
 // get the snake alive or not

@@ -7,8 +7,10 @@
         #include <fcntl.h>
         #include <termios.h>
         #include <unistd.h>
+        #include <stdio.h>
+        #include <stdlib.h>
 
-        int _getch() {
+        inline int _getch() {
             struct termios oldt, newt;
             int ch;
             tcgetattr(STDIN_FILENO, &oldt);
@@ -19,7 +21,7 @@
             tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
             return ch;
         }
-        int _kbhit() {
+        inline int _kbhit() {
             struct termios oldt, newt;
             int ch, oldf;
             tcgetattr(STDIN_FILENO, &oldt);

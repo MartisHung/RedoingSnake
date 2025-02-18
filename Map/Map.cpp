@@ -1,9 +1,16 @@
 #include "Map.h"
 #include "../Snake/Snake.h"
-#include <conio.h>
+#include "../ForCrossPlatform.h"
+
 #include <chrono>
 #include <thread>
 #include <iostream>
+#if defined(__linux__) || defined(__APPLE__)
+    #include <unistd.h>
+    #define _write write
+#elif defined(__WIN32__)
+    #include <io.h>
+#endif
 
 Map::Map(){
     _write(1,"press the arrow to select the Map\nAnd press enter to play\n",58);
@@ -70,7 +77,8 @@ void Map::MapSelecting(){
     char ch=0x00;
     _write(1,"press 'q' to select \nleft / right to switch map\n",48);
     ShowMap();
-    while(!_kbhit()) continue;
+    
+    printf("press any");
     do{
         if(_kbhit()){
             printf("\033[2J\033[H");

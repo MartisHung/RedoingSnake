@@ -5,7 +5,7 @@
             "name": "Launch Snake Game",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/Snake.Game.g++.exe",
+            "program": "${workspaceFolder}/Snake.Game.clang++.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
