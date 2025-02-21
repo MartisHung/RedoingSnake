@@ -1,9 +1,3 @@
-/**
- * @file Snake.c
- * @brief sentimentel index defination of the Snake
- * @author Martis
- * @include ForTypeDef.h
- */
 #ifndef __SNAKE_H__
 #define __SNAKE_H__
 
@@ -20,6 +14,8 @@ class Snake {
     bool operator==(decltype(nullptr))const;
     bool operator==(int)=delete;
     void operator^=(char **MapUsing);
+    void operator^=(decltype(nullptr));
+    void operator^=(int)=delete;
     bool getMovement(char ch);
     void RenderOnMap(char **MapUsing);
     void EraseOnMap(char **MapUsing)const;
@@ -35,7 +31,7 @@ class Snake {
      * @brief 3 bit:player/_Robot_ 2 bit:alive 1 bit: foodeated
      * @brief else: null
      */
-    bool_array For_Snake = 0b00;
+    bool_array For_Snake = 0b10;
 };
 
 #endif

@@ -11,32 +11,30 @@ Map::Map(){
     _write(1,"press the arrow to select the Map\nAnd press enter to play\n",58);
     this->MapSelecting();
     _write(1,"Map Select finished ,after pressing WASD or arrow key will start\n", 65);
-    Snake *Player=new Snake(this->MapSelect,this->MapUsing,nullptr);
+    Snake Player(this->MapSelect,this->MapUsing,nullptr);
     this->ShowMap(nullptr);
     do{
         while(!_kbhit())continue;
-        if(Player->getMovement(_getch()))break;
+        if(Player.getMovement(_getch()))break;
         printf("error the key you press is neither arrow nor WASD");
     }while(1);
-    
     this->foodGenerate();
     printf("\033[2J\033[H");
     this->ShowMap(nullptr);
 
     //Scan is alive or not (opertor have been overloaded)
     //game start
-    while(Player->operator==(nullptr)){
-        Player->EraseOnMap(this->MapUsing);
-        Player->operator^=(this->MapUsing);
-        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+    while(Player.operator==(nullptr)){
+        Player.EraseOnMap(this->MapUsing);
+        Player.operator^=(this->MapUsing);
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
         this->foodGenerate();
-        Player->RenderOnMap(this->MapUsing);
+        Player.RenderOnMap(this->MapUsing);
         printf("\033[2J\033[H");
         this->ShowMap(nullptr);
-        if(_kbhit()) Player->getMovement(_getch());
-        for(int8 i=0;i<3;i++){
+        if(_kbhit()) Player.getMovement(_getch());
+        for(int8 i=0;i<5;i++){
             printf("\033[2J\033[H");this->ShowMap(nullptr);
-            std::this_thread::sleep_for(std::chrono::milliseconds(50));
         }
     }
 }
@@ -84,8 +82,6 @@ void Map::MapSelecting(){
     char ch=0x00;
     _write(1,"press 'q' to select \nleft / right to switch map\n",48);
     this->ShowMap();
-    
-    printf("press any");
     do{
         if(_kbhit()){
             printf("\033[2J\033[H");
@@ -100,7 +96,7 @@ void Map::MapSelecting(){
                         case 77:{if((this->MapSelect&0x3)==0x3){this->MapSelect&=0x0;}else{this->MapSelect++;} this->ShowMap();break;}
                     }
                 }
-                case 'q':break;
+                case 'Q':case 'q':if(ch=='Q'){ch+= 32;}break;
             }
         }
     } while(ch!='q');

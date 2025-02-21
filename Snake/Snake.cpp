@@ -20,6 +20,8 @@ Snake::Snake(bool_array MapSelect, char **MapUsing, decltype(nullptr)) {
     MapUsing[location[0].a.y][location[0].a.x] = 'H';
 }
 Snake::Snake(char **MapUsing) {
+    location =new SnakeLocate[1];
+    // SnakeLocate*location[1]=new SnakeLocate[1];
     do {
         location[0].ll = (rand() % MAX_OF_MAP_X) << 8 | rand() % 0x15;
         if (MapUsing[location[0].a.y][location[0].a.x] == ' ')break;
@@ -41,31 +43,21 @@ void Snake::operator^=(char **MapUsing) {
     // Scan the snake  alive or not
     if (For_Snake & 0b110) {
         if (MapUsing[location[0].a.y + dy][location[0].a.x + dx] == '#' ||
-            MapUsing[location[0].a.y + dy][location[0].a.x + dx] == 'E' ||
-            MapUsing[location[0].a.y + dy][location[0].a.x + dx] == 'H') {
+            MapUsing[location[0].a.y + dy][location[0].a.x + dx] == 'E' ){
             For_Snake &= 0b00;
             _write(1, "Snake Dead\n", 11);
             return;
         }
-        else if (MapUsing[location[0].a.y + dy][location[0].a.x + dx] == '.') { For_Snake |= 1; }
-
-        for (int8 i = 1; i < length; i++) {
-            location[i].ll = location[i-1].ll;
-        }
-        location[0].a.x += dx;
-        location[0].a.y += dy;
+        else if (MapUsing[location[0].a.y + dy][location[0].a.x + dx] == '.') For_Snake |= 1;
         
-        dx = location[length - 1].a.x - dx;
-        dy = location[length - 1].a.y - dy;
-    } else if ((For_Snake >> 2) == 0) {
+        Resize();
+    }
+    else if ((For_Snake >> 2) == 0) {
         if (MapUsing[location[0].a.y + dy][location[0].a.x + dx] == '#' ||
-            MapUsing[location[0].a.y + dy][location[0].a.x + dx] == 'P' ||
-            MapUsing[location[0].a.y + dy][location[0].a.x + dx] == 'H') {
+            MapUsing[location[0].a.y + dy][location[0].a.x + dx] == 'P' ) {
             For_Snake &= 0b00;
         }
     }
-    Resize();
-
     switch (Direction) {
         case direction::forward:    dx = 0;dy =-1;break;
         case direction::backward:   dx = 0;dy = 1;break;
@@ -76,12 +68,11 @@ void Snake::operator^=(char **MapUsing) {
 
 void Snake::RenderOnMap(char **MapUsing) {
     if (For_Snake & 0b110) {
-        MapUsing[location[0].a.y][location[0].a.x] = 'H';
-        for (int8 i = 1; i < length; i++)MapUsing[location[i].a.y][location[i].a.x] = 'P';
+        for (int8 i = 0; i < length; i++)MapUsing[location[i].a.y][location[i].a.x] = 'P';
     } else if ((For_Snake >> 2) == 0) {
-        MapUsing[location[0].a.y][location[0].a.x] = 'E';
-        for (int8 i = 1; i < length; i++)MapUsing[location[i].a.y][location[i].a.x] = 'P';
+        for (int8 i = 0; i < length; i++)MapUsing[location[i].a.y][location[i].a.x] = 'E';
     }
+
 }
 
 void Snake::EraseOnMap(char **MapUsing) const{ for(int8 i = 0; i < length; i++)MapUsing[location[i].a.y][location[i].a.x] = ' ';}
@@ -90,18 +81,20 @@ void Snake::EraseOnMap(char **MapUsing) const{ for(int8 i = 0; i < length; i++)M
 bool Snake::operator==(decltype(nullptr)) const { return (For_Snake & 0b10) ? true : false;}
 
 void Snake::Resize() {
-    if(For_Snake & 0b01)  {
+    if(For_Snake&0b01){
         length++;
-        SnakeLocate *tempory = new SnakeLocate[length];
-        for (int8 i = 0; i < length - 1; i++)tempory[i].ll = location[i].ll;
-        tempory[length - 1].a.x = dx;
-        tempory[length - 1].a.y = dy;
+        SnakeLocate *temp = new SnakeLocate[length];
+        for (int8 i = 1; i < length ; i++) temp[i] = location[i-1];
+        temp[0].a.x = location[0].a.x+dx; temp[0].a.y = location[0].a.y+dy;
         delete[] location;
-        location = tempory;
-        if (tempory != nullptr)tempory = nullptr;
-        dx = dy = 0;
-        For_Snake --;
-        
+        location = temp;
+        temp = nullptr;
+        For_Snake--;
+    }
+    else{
+        for (int8 i = length - 1; i > 0; i--)location[i] = location[i - 1];
+        location[0].a.x += dx;
+        location[0].a.y += dy;
     }
 }
 
