@@ -5,14 +5,14 @@
             "name": "Launch Snake Game",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/Snake.Game.clang++.exe",
+            "program": "${workspaceFolder}/Snake.Game.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": true,
             "MIMode": "gdb",
-            "miDebuggerPath": "gdb", // 確保 gdb 在你的 PATH 中
+            "miDebuggerPath": "C:\\mingw64\\bin\\gdb.exe", // 確保 gdb 在你的 PATH 中
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",

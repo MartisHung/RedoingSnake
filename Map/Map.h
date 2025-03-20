@@ -13,6 +13,7 @@
 #include "../ForTypeDef.h"
 #include "../Snake/Snake.h"
 class Map {
+    void debug()const;
     public:
         Map();
         ~Map();
@@ -20,18 +21,21 @@ class Map {
         /// @param MapUsing the map rn using
         char** MapUsing = nullptr;
     private:
-        Snake *Player=nullptr, *Enemy[0x0A]={nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr};
+        Snake *Player=nullptr, *Enemy[0xA]={nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr};
         ///@param MapSelect
         ///@brief 0b0000 0000 @n
         ///@brief high 4 bit elder map selected | low 4 bit rn map selected
         bool_array MapSelect = 0b00000000;
-        void ShowMap()const;
-        void ShowMap(decltype(nullptr))const;
-        void MapTransfer();
-        void MapCoping(int8 i);
-        void MapSelecting();
-        void foodGenerate();
-        void enemyGenerate();
+        int8 enemyExist = 0;
+        void MapTransfer    ();
+        void MapSelecting   ();
+        void enemyGenerate  ();
+        void foodGenerate   ();
+        void ShowMap        ()          const;
+        void MapCoping      (int8 i);
+        void ShowMap        (_nullptr_t)const;
+        static void delay   ();
+        inline static void  clearScreem () __attribute__((__always_inline__)) {printf("\033[2J\033[H");}
         //Map reference Map1/Map2/Map3/Map4 | 0x0 0x1 0x2 0x3
         inline static constexpr char Map1[MAX_OF_MAP_1_Y][MAX_OF_MAP_X]={
             "################################################################\n",

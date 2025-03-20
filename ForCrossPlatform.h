@@ -4,6 +4,7 @@
         #include<io.h>
         #include <conio.h>
         #include <windows.h>
+        #include <stdio.h>
         inline void TemporyKeyboardSetting() {
             HKL hkl = LoadKeyboardLayoutW(L"00000409", KLF_ACTIVATE);
         }

@@ -6,23 +6,23 @@
 #include <thread>
 #include <iostream>
 
-
 Map::Map(){
     _write(1,"press the arrow to select the Map\nAnd press enter to play\n",58);
     this->MapSelecting();
     _write(1,"Map Select finished ,after pressing WASD or arrow key will start\n", 65);
-    Player = new Snake(this->MapSelect,this->MapUsing,nullptr);
+    Player = new Snake(this->MapSelect,this->MapUsing);
     this->ShowMap(nullptr);
     do{
         while(!_kbhit())continue;
         if(Player->getMovement(_getch()))break;
-        printf("error the key you press is neither arrow nor WASD");
+        this->clearScreem();
+        this->ShowMap(nullptr);
+        _write(1,"error the key you press is neither arrow nor WASD", 49);
     }while(1);
     this->foodGenerate();
-    printf("\033[2J\033[H");
+    this->enemyGenerate();
+    this->clearScreem();
     this->ShowMap(nullptr);
-
-   
 }
 
 Map::~Map() {
@@ -39,20 +39,42 @@ Map::~Map() {
     system("pause");
 }
 
-void Map::GameLoop() {
-     //Scan is alive or not (opertor have been overloaded)
-    //game start
+void Map::GameLoop() {    
+    //Scan is alive or not (opertor have been overloaded)
     while(Player->operator==(nullptr)){
+        this->foodGenerate();
+        this->enemyGenerate();
         Player->EraseOnMap(this->MapUsing);
         Player->operator^=(this->MapUsing);
-        std::this_thread::sleep_for(std::chrono::milliseconds(200));
-        this->foodGenerate();
         Player->RenderOnMap(this->MapUsing);
-        printf("\033[2J\033[H");
-        this->ShowMap(nullptr);
+        this->clearScreem();
+        this->ShowMap(nullptr);        
         if(_kbhit()) Player->getMovement(_getch());
-        for(int8 i=0;i<5;i++){
-            printf("\033[2J\033[H");this->ShowMap(nullptr);
+        this->delay();
+    }
+}
+
+void Map::enemyGenerate() {
+    static int8 addingTimes= 0x55; // binary 0101 0101
+    if(enemyExist<10){
+        //rotation left 1bit
+        asm( "rolb $1, %0" : "=r"(addingTimes) : "0"(addingTimes) );
+        if( addingTimes & 0x80 ) {
+            enemyExist++;
+            Enemy[enemyExist - 1] = new Snake(MapUsing);
+        }
+    }
+    for(int8 i=0;i<enemyExist;i++){
+        if( Enemy[i]->operator== (nullptr ) ) {
+            Enemy[i]->EraseOnMap (MapUsing);
+            Enemy[i]->operator|= (MapUsing);
+            Enemy[i]->RenderOnMap(MapUsing);
+        }
+        else {
+            enemyExist--;
+            Enemy[i]->ChangeToFood(MapUsing);
+            delete Enemy[i];
+            for(int8 j=i;j<enemyExist;j++)Enemy[j]=Enemy[j+1];
         }
     }
 }
@@ -89,7 +111,7 @@ void Map::MapSelecting(){
     this->ShowMap();
     do{
         if(_kbhit()){
-            printf("\033[2J\033[H");
+            this->clearScreem();
             ch = _getch();
             switch(ch){
                 case 'A':case 'a':{if((this->MapSelect&0x3)==0x0){this->MapSelect|=0x3;}else{this->MapSelect--;} this->ShowMap();break;}
@@ -109,7 +131,7 @@ void Map::MapSelecting(){
     this->MapTransfer();
 }
 
-void Map::foodGenerate() {
+inline void Map::foodGenerate() {
     static int8 addingTimes= 0x44;
     asm( "rolb $1, %0" : "=r"(addingTimes) : "0"(addingTimes) );
     if(addingTimes&0x80){    
@@ -123,7 +145,7 @@ void Map::foodGenerate() {
 }   
 
 //(Asm) MOV map2,map1
-void Map::MapCoping(int8 i) {
+inline void Map::MapCoping(int8 i) {
     switch(this->MapSelect ){
         case 0x0:for(int8 j=0;j<MAX_OF_MAP_X;j++) {this->MapUsing[i][j]=Map1[i][j];}break;
         case 0x1:for(int8 j=0;j<MAX_OF_MAP_X;j++) {this->MapUsing[i][j]=Map2[i][j];}break;
@@ -131,10 +153,11 @@ void Map::MapCoping(int8 i) {
         case 0x3:for(int8 j=0;j<MAX_OF_MAP_X;j++) {this->MapUsing[i][j]=Map4[i][j];}break;
     }
 }
+
 /// @brief Show the map 
 /// @param ShowMap(nullptr) will show the map rn using 
 /// @param this->ShowMap() will show the map selected
-void Map::ShowMap(decltype(nullptr)) const{
+void Map::ShowMap(_nullptr_t) const{
     switch(this->MapSelect & 0x7){
         case 0x0:for(int8 i=0;i<MAX_OF_MAP_1_Y;i++)_write(1,this->MapUsing[i],MAX_OF_MAP_X);break;
         case 0x1:for(int8 i=0;i<MAX_OF_MAP_2_Y;i++)_write(1,this->MapUsing[i],MAX_OF_MAP_X);break;
@@ -151,26 +174,13 @@ void Map::ShowMap()const{
     }
 }
 
-void Map::enemyGenerate() {
-    static int8 addingTimes= 0x55,enemyExist=0;
-    //add logic
-    if(enemyExist!=10){
-        if(addingTimes&0x80){
-            enemyExist++;
-            this->Enemy[enemyExist]=new Snake(this->MapSelect,this->MapUsing,nullptr);
-        }
-        asm( "rolb $1, %0" : "=r"(addingTimes) : "0"(addingTimes) );
-    }
-    //Scan is alive or not (opertor have been overloaded)
-    for(int8 i=0;i<enemyExist;i++){
-        if(this->Enemy[i]->operator==(nullptr)){
-        
-        }
-        else{
-            this->Enemy[i]->EraseOnMap(this->MapUsing);//change to "operator delete"
-            enemyExist--;
-            delete this->Enemy[i];
-            for(int8 j=i;j<enemyExist;j++)this->Enemy[j]=this->Enemy[j+1];
-        }
-    }
+//delay 200 microSeconds
+inline void Map::delay() {
+    long f_duration=0;
+    m_clock_t start = std::chrono::high_resolution_clock::now();
+    do{
+        f_duration = std::chrono::duration_cast<std::chrono::milliseconds>
+        (std::chrono::high_resolution_clock::now()-start).count();
+    
+    }while (f_duration<200); 
 }

@@ -4,13 +4,13 @@
         {
             "label": "Build Snake Game",
             "type": "shell",
-            "command": "clang++",
+            "command": "g++",
             "args": [
                 "main.cpp",
                 "Snake/Snake.cpp",
                 "Map/Map.cpp",
                 "-o",
-                "Snake.Game.clang++.exe",
+                "Snake.Game.exe",
                 "-O2",
                 "-lUser32"
             ],
@@ -23,7 +23,7 @@
         {
             "label": "Run Snake Game",
             "type": "shell",
-            "command": "${workspaceFolder}/Snake.Game.clang++.exe",
+            "command": "${workspaceFolder}/Snake.Game.exe",
             "group": {
                 "kind": "test",
                 "isDefault": true
