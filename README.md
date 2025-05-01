@@ -3,10 +3,7 @@ A snake game made by C/C++
 這是一個用 C/C++ 的貪食蛇遊戲。
 
 ## Project Status
-Not finished
-
-## Alert: The Project Isn't Finished, Please Don't Download. Thanks  
-不要下載!!!!
+curiously finished
 
 ## Download
 

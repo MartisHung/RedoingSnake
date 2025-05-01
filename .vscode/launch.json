@@ -12,7 +12,7 @@
             "environment": [],
             "externalConsole": true,
             "MIMode": "gdb",
-            "miDebuggerPath": "C:\\mingw64\\bin\\gdb.exe", // 確保 gdb 在你的 PATH 中
+            "miDebuggerPath": "C:\\mingw64\\bin\\gdb.exe", // the path to your executable gdb
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",

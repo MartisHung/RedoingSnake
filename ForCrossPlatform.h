@@ -8,14 +8,14 @@
         inline void TemporyKeyboardSetting() {
             HKL hkl = LoadKeyboardLayoutW(L"00000409", KLF_ACTIVATE);
         }
-        
+        inline void clearScreem() {system("cls");}
     #elif defined(__linux__) || defined(__APPLE__)
         #include <fcntl.h>
         #include <termios.h>
         #include <unistd.h>
         #include <stdio.h>
         #include <stdlib.h>
-        
+        inline void clearScreem() {system("clear");}
         inline int _getch() {
             struct termios oldt, newt;
             int ch;

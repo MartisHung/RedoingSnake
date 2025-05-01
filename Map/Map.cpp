@@ -15,13 +15,13 @@ Map::Map(){
     do{
         while(!_kbhit())continue;
         if(Player->getMovement(_getch()))break;
-        this->clearScreem();
+        clearScreem();
         this->ShowMap(nullptr);
         _write(1,"error the key you press is neither arrow nor WASD", 49);
     }while(1);
     this->foodGenerate();
     this->enemyGenerate();
-    this->clearScreem();
+    clearScreem();
     this->ShowMap(nullptr);
 }
 
@@ -36,7 +36,8 @@ Map::~Map() {
         delete[] this->MapUsing;
     }
     _write(1,"release finish", 14);
-    system("pause");
+    printf("\npress enter to exit\n");
+    do{}while(std::cin.get()!='\n');
 }
 
 void Map::GameLoop() {    
@@ -45,9 +46,9 @@ void Map::GameLoop() {
         this->foodGenerate();
         this->enemyGenerate();
         Player->EraseOnMap(this->MapUsing);
-        Player->operator^=(this->MapUsing);
+        Player->move(this->MapUsing,this->MapSelect);
         Player->RenderOnMap(this->MapUsing);
-        this->clearScreem();
+        clearScreem();
         this->ShowMap(nullptr);        
         if(_kbhit()) Player->getMovement(_getch());
         this->delay();
@@ -111,7 +112,7 @@ void Map::MapSelecting(){
     this->ShowMap();
     do{
         if(_kbhit()){
-            this->clearScreem();
+            clearScreem();
             ch = _getch();
             switch(ch){
                 case 'A':case 'a':{if((this->MapSelect&0x3)==0x0){this->MapSelect|=0x3;}else{this->MapSelect--;} this->ShowMap();break;}
@@ -164,6 +165,7 @@ void Map::ShowMap(_nullptr_t) const{
         case 0x2:for(int8 i=0;i<MAX_OF_MAP_3_Y;i++)_write(1,this->MapUsing[i],MAX_OF_MAP_X);break;
         case 0x3:for(int8 i=0;i<MAX_OF_MAP_4_Y;i++)_write(1,this->MapUsing[i],MAX_OF_MAP_X);break;
     }
+    fflush(stdout);
 }
 void Map::ShowMap()const{
     switch(this->MapSelect & 0xF){
@@ -172,9 +174,10 @@ void Map::ShowMap()const{
         case 0b10:for(int8 i=0;i<MAX_OF_MAP_3_Y;i++)_write(1,Map3[i],MAX_OF_MAP_X);break;
         case 0b11:for(int8 i=0;i<MAX_OF_MAP_4_Y;i++)_write(1,Map4[i],MAX_OF_MAP_X);break;
     }
+    fflush(stdout);
 }
 
-//delay 200 microSeconds
+//delay 400 microSeconds
 inline void Map::delay() {
     long f_duration=0;
     m_clock_t start = std::chrono::high_resolution_clock::now();
@@ -182,5 +185,5 @@ inline void Map::delay() {
         f_duration = std::chrono::duration_cast<std::chrono::milliseconds>
         (std::chrono::high_resolution_clock::now()-start).count();
     
-    }while (f_duration<200); 
+    }while (f_duration<400); 
 }

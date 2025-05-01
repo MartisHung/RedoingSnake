@@ -11,8 +11,7 @@
  #include "Map/Map.h"
  #include <stdlib.h>
  #include <time.h>
- //TODO : Teleport Logic (undo)
- int main() {
+int main() {
      Map player1;
      srand(time(NULL));
      TemporyKeyboardSetting();

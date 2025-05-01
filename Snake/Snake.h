@@ -10,9 +10,9 @@ class Snake {
     Snake             (bool_array MapSelect,char **MapUsing);
     Snake             (char** MapUsing);        //Enemy's
     ~Snake();
+    void              move         (char **MapUsing,char );        //Player's movement
     bool              getMovement  (char ch);
     void              RenderOnMap  (char **MapUsing);
-    void              operator^=   (char **MapUsing);        //Player's movement
     void              operator|=   (char **MapUsing);        //enemy's  movement
     bool              operator==   (_nullptr_t)      const ; //Get alive
     void              EraseOnMap   (char **MapUsing) const ;
