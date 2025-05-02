@@ -5,6 +5,20 @@ A snake game made by C/C++
 ## Project Status
 curiously finished
 
+## Projet Architecture
+```Architecture
+    |
+    |-- main.cpp
+    |-- ForTypeDef.h
+    |-- ForCrossPlatform.h
+    |-- <dir>Map</dir>
+    |   |-- Map.cpp
+    |   |-- Map.h
+    |-- <dir>Snake</dir>
+        |-- Snake.h
+        |-- Snake.cpp
+```
+
 ## Download
 
 1. git clone：
